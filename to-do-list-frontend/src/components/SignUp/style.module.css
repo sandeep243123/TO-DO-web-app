@@ -1,0 +1,49 @@
+.container{
+  background-color: #1B1A55;
+  height: 600px;
+  width: 420px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  flex-direction: column;
+  border-top: 1px solid white;
+  margin-top: 30px;
+}
+.container img{
+  height: 200px;
+  margin-top: -100px;
+}
+.inputDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 280px;
+  margin-top: 40px;
+}
+.inputDiv input{
+  width: 300px;
+  height: 35px;
+  outline: none;
+  border-radius: 10px;
+  padding-left: 10px;
+  font-size: 1rem;
+}
+.signBtn{
+  width: 200px;
+  height: 40px;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: 0.3s;
+}
+.signBtn:hover{
+  opacity: 0.8;
+}
+.inputDiv p{
+  margin-top: -2px;
+  color: red;
+  font-weight: bold;
+}

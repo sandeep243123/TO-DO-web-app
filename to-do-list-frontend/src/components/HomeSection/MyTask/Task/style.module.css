@@ -1,0 +1,28 @@
+.container{
+  height: 220px;
+  width: 370px;
+  /* background-color:#9290C3; */
+  background-color: rgb(41, 38, 38);
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+  padding-top: 0;
+  margin: 10px;
+  border-top: 1px solid white;
+}
+.details{
+  width: 100%;
+  height: 170px;
+}
+.details p{
+  height: 135px;
+  overflow-y: auto;
+  margin-top: -0px;
+}
+.actions{
+  width: 100%;
+  margin-top: 7px;
+}
+.actions button{
+  margin: 5px;
+}
