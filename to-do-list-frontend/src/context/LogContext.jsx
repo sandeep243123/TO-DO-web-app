@@ -4,9 +4,12 @@ const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
   const [userId, setUserId] = useState(null)
+  const [tokenContext,setTokenContext]=useState(null)
   const value = {
     userId,
-    setUserId
+    setUserId,
+    tokenContext,
+    setTokenContext
   }
   return (<DataContext.Provider value={value}>
     {children}
