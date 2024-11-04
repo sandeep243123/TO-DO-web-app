@@ -9,6 +9,7 @@ import Select from '@mui/material/Select';
 import { addTask } from '../../../Service/TodoService';
 import { ToastContainer, toast } from 'react-toastify';
 import DataContext from '../../../context/LogContext';
+import { Audio } from 'react-loader-spinner'
 
 function Add() {
   const {userId}=useContext(DataContext)
@@ -28,31 +29,38 @@ function Add() {
       [name]:value
     })
   };
-  const handleOnSubmit=(e)=>{
+  const handleOnSubmit=async (e)=>{
     e.preventDefault()
     setFlag(true)
     formValues.dueDate=date
     formValues._id=userId
     setFormErrors(validate(formValues))
-    console.log(formErrors)
+    console.log("formvalues",formValues)
+    await addTask(formValues)
     setIsSubmit(true)
+    notify("Task Added Successfully")
+    handleOnReset()
+    setFlag(false)
   }
-  useEffect(()=>{
-    if(Object.keys(formErrors).length===0&&isSubmit){
-      console.log(formValues)
-      addTask(formValues).then((res)=>{
-        console.log("result",res)
-        // if(res.success){
-        //   notify(res.message)
-        // }else{
-        //   notify(res.message)
-        // }
-      }).finally(()=>{
-        setFlag(false)
-      })
-    }
-    setIsSubmit(false)
-  },[formErrors])
+  const handleOnReset=()=>{
+    setFormValues(initialValues)
+    setDate("")
+  }
+  // useEffect(()=>{
+  //   if(Object.keys(formErrors).length===0&&isSubmit){
+  //     console.log(formValues)
+  //     addTask(formValues).then((res)=>{
+  //       // if(res.success){
+  //       //   notify(res.message)
+  //       // }else{
+  //       //   notify(res.message)
+  //       // }
+  //     }).finally(()=>{
+  //       setFlag(false)
+  //     })
+  //   }
+  //   setIsSubmit(false)
+  // },[formErrors])
 
   const validate=(values)=>{
     const error={}
@@ -61,7 +69,22 @@ function Add() {
     }
     return error
   }
-  return (
+  return flag?(flag&&<div style={{
+    width:"100%",
+    height:"100vh",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center"
+  }}>
+    <Audio
+    height="80"
+    width="80"
+    radius="9"
+    color="green"
+    ariaLabel="loading"
+    wrapperStyle
+    wrapperClass/>
+  </div>):(
     <div className={style.container}>
       <h1>Make your TO DO List</h1>
       <div className={style.formContainer}>
@@ -113,7 +136,7 @@ function Add() {
           </div>
         </form>
         <div className={style.btnSection}>
-          <button>Reset</button>
+          <button onClick={handleOnReset}>Reset</button>
           <button onClick={handleOnSubmit}>Add</button>
         </div>
       </div>

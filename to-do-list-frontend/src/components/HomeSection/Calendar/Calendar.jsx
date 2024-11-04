@@ -20,7 +20,7 @@ function Calendar({setDate}) {
   }, [cleared]);
 
   const handleOnchange=(date)=>{
-    setDate(date.format("L"));
+    setDate(date.format("DD/MM/YYYY"));
   }
 
   return (

@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from '../HomeSection/style.module.css'
 import Tab from './TabSection/Tab'
 import Welcome from './Welcome/Welcome';
 import Add from './AddTask/Add'
 import MyTask from './MyTask/MyTask';
-function Home() {
+import About from '../AboutUs/AboutUs'
+function Home({setIsAuthenticated}) {
   const [selectedItem,setSelectedItem]=useState(0);
+  
   function handleOption(){
     switch(selectedItem){
       case 1:
@@ -17,7 +19,7 @@ function Home() {
       case 4:
         return 4
       case 5:
-        return 5
+        return <About/>
       case 6:
         return 6
       default:
@@ -26,7 +28,7 @@ function Home() {
   }
   return (
     <div className={style.container}>
-      <Tab selectItem={setSelectedItem}></Tab>
+      <Tab setIsAuthenticated ={setIsAuthenticated} selectItem={setSelectedItem}></Tab>
       {
         handleOption()
       }

@@ -8,8 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import DataContext from '../../context/LogContext';
 
 
-function Login() {
-  const {setUserId}=useContext(DataContext)
+function Login({setIsAuthenticated}) {
+  const {setUserId,setTokenContext}=useContext(DataContext)
   const navigate = useNavigate(); // Initialize useHistory
   const [flag,setFlag]=useState(false)
   const [email,setEmail]=useState('')
@@ -18,13 +18,15 @@ function Login() {
   const notify = (e) => toast(e);
   const handleLogin=async ()=>{
     setFlag(true);    
-    const isAuthenticated=await loginUser(email,password)
-    if (isAuthenticated.success==true) {
-      setUserId(isAuthenticated.data._id)
+    const isValid=await loginUser(email,password)
+    if (isValid.success==true) {
+      setTokenContext(isValid.token)
+      setUserId(isValid.data._id)
+      setIsAuthenticated(true)
       setFlag(false)
       navigate('/home'); // Change '/home' to your home route
     }else{
-      notify(isAuthenticated)
+      notify(isValid)
     }
     setFlag(false)
   }

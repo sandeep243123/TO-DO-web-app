@@ -14,8 +14,5 @@ export const tabData = [
   }, {
     id: 5,
     title: "About"
-  }, {
-    id: 6,
-    title: "Logout"
   }
 ]

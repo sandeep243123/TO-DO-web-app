@@ -31,7 +31,6 @@ function SignUp() {
   useEffect(()=>{
     if(Object.keys(formErrors).length===0&&isSubmit){
       registerUser(formValues).then((res)=>{
-        console.log(res)
         if(res.success){
           notify(res.message)
           navigate('/login')
