@@ -1,0 +1,45 @@
+.container{
+  background-color: #1B1A55;
+  height: 500px;
+  width: 420px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  flex-direction: column;
+  border-top: 1px solid white;
+  
+
+}
+.container img{
+  height: 200px;
+  margin-top: -100px;
+}
+.inputDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 170px;
+  margin-top: 40px;
+}
+.inputDiv input{
+  width: 300px;
+  height: 35px;
+  outline: none;
+  border-radius: 10px;
+  padding-left: 10px;
+  font-size: 1rem;
+}
+.logBtn{
+  width: 200px;
+  height: 40px;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: 0.3s;
+}
+.logBtn:hover{
+  opacity: 0.8;
+}
