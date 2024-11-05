@@ -33,6 +33,7 @@ Additional Libraries
 	•	React Loader Spinner for loading animations.
 
 📂 Project Structure
+
 ├── backend
 │   ├── config           # Configuration files
 │   ├── controllers      # Controller functions for tasks and users
