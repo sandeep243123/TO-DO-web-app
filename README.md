@@ -32,23 +32,6 @@ Additional Libraries
 	•	React-Toastify for notifications.
 	•	React Loader Spinner for loading animations.
 
-📂 Project Structure
-
-├── backend
-│   ├── config           # Configuration files
-│   ├── controllers      # Controller functions for tasks and users
-│   ├── models           # Mongoose models for Task and User
-│   ├── routes           # Express routes
-│   └── app.js           # Main server file
-├── frontend
-│   ├── public           # Static assets
-│   ├── src
-│   │   ├── components   # Reusable components (e.g., Task)
-│   │   ├── context      # Context API for global state
-│   │   ├── pages        # Page components
-│   │   └── App.js       # Main app file
-├── .env                 # Environment variables
-└── README.md
 
 📦 Installation
 
