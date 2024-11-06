@@ -24,14 +24,17 @@ function SignUp() {
   }
   const handleOnSubmit=(e)=>{
     e.preventDefault();
-    setFlag(true)
     setFormErrors(validate(formValues))
     setIsSubmit(true)
   }
+
+
   useEffect(()=>{
     if(Object.keys(formErrors).length===0&&isSubmit){
+      setFlag(true)
       registerUser(formValues).then((res)=>{
         if(res.success){
+          setFlag(false)
           notify(res.message)
           navigate('/login')
         }else{
@@ -40,6 +43,7 @@ function SignUp() {
       }).finally(()=>{
         setFlag(false)
       })
+      
     }
     setIsSubmit(false)
   },[formErrors])

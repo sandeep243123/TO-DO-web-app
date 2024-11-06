@@ -5,17 +5,25 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { updateStatus } from '../../../../Service/TodoService';
 
-function Task({title,desc,status,onDelete,taskId,priority,dueDate}) {
+function Task({title,desc,onDelete,taskId,priority,dueDate,handleOnStatus,status}) {
   const [pColor,setpColor]=useState();
   useEffect(()=>{
-    if(priority=='Medium')
+    if(priority==='Medium')
       setpColor("yellow")
-    else if(priority=="High")
+    else if(priority==="High")
       setpColor("red")
     else
-    setpColor("green")
+      setpColor("green")
   },[])
+
+  const handleOnDone=async ()=>{
+    const res=await updateStatus(taskId,"Completed")
+    handleOnStatus()
+    console.log(res)
+  }
+
   return (
     <div className={style.container} >
       <div className={style.details}>
@@ -23,7 +31,7 @@ function Task({title,desc,status,onDelete,taskId,priority,dueDate}) {
         <p>{desc}</p>
       </div>
       <div className={style.actions}>
-        <Button style={{backgroundColor:"rgb(41, 38, 38)"}} variant="contained"><CheckCircleIcon/></Button>
+        <Button style={{backgroundColor:"rgb(41, 38, 38)",color:`${status==='Completed'?'green':'white'}`}} variant="contained" onClick={handleOnDone}><CheckCircleIcon/></Button>
         <Button style={{backgroundColor:"rgb(41, 38, 38)"}} variant="contained"><EditIcon/></Button>
         <IconButton aria-label="delete">
           <DeleteIcon style={{cursor:"pointer",color:"white"}} variant="contained" onClick={()=>onDelete(taskId)}>Delete</DeleteIcon>

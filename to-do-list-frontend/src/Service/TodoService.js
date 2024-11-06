@@ -2,10 +2,10 @@ import axios from 'axios'
 import { useContext } from 'react';
 const URL = "http://localhost:4000/api/v1/"
 
-const loginUser = async (email, password) => {
+const loginUser = async (obj) => {
   const data = {
-    "email": email,
-    "password": password
+    "email": obj.email,
+    "password": obj.password
   }
   try {
     const response = await axios.post(URL + "login", data);
@@ -70,21 +70,58 @@ const deleteTask = async (taskId) => {
   }
 }
 
-const taskList = async () => {
+const taskList = async (taskStatus) => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
-
   try {
-    const response = await axios.get(URL + "getTasks/" + userId, {
+    const response = await axios.get(URL + "getTasksByStatus/" + userId, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      params: { userId: userId }  // Passing userId as a query parameter
+      params: { "status": taskStatus }  // Passing userId as a query parameter
     });
     return response.data.data;
   } catch (e) {
     console.log("Error with log", e.response.data);
   }
 }
-export { loginUser, taskList, registerUser, addTask, deleteTask }
+
+const getAllTask = async () => {
+  try {
+    const response = await axios.get(URL + "getTasks/" + localStorage.getItem('userId'), {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json'
+      },
+      // params: { "userId": localStorage.getItem('userId') }
+      // Passing userId as a query parameter
+    });
+    return response.data.data;
+  } catch (e) {
+    console.log("Error with log", e.response.data);
+  }
+}
+
+const updateStatus = async (taskId, taskStatus) => {
+  const data = {
+    "_id": taskId,
+    "status": taskStatus
+  }
+  console.log("data", data)
+  try {
+    const response = await axios.post(URL + "update/", data, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+    });
+    // console.log(response.data.data)
+    return response;
+  } catch (e) {
+    console.log("Error with log", e.response);
+  }
+}
+
+export { loginUser, taskList, registerUser, addTask, deleteTask, updateStatus, getAllTask }
+

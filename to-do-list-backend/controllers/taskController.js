@@ -31,6 +31,7 @@ exports.createTask = async (req, res) => {
 exports.getTasks = async (req, res) => {
     try {
         const { userId } = req.params
+        console.log("userid", userId)
         const tasks = await Todo.find({ createdBy: userId })
         res.status(200).json(
             {
@@ -52,12 +53,14 @@ exports.getTasks = async (req, res) => {
 
 exports.updateStatus = async (req, res) => {
     try {
-        const { id, status } = req.body;
+        const { _id, status } = req.body;
         const updatedTask = await Todo.findByIdAndUpdate(
-            id,
+            _id,
             { status: status },
             { new: true, runValidators: true }
         );
+
+        console.log(req.body, updatedTask)
         if (!updatedTask) {
             return res.status(404).json({
                 success: false,
